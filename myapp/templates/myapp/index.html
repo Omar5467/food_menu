@@ -1,0 +1,22 @@
+{% extends 'myapp/base.html' %}
+
+    {% block body %}
+    <div>
+        {% for items in item_list %}
+        <div class="m-10 flex w-1/2 mx-auto">
+            <div>
+                <img class="w-64 rounded-lg" src="{{items.item_image}}">
+            </div>
+            <div class="mx-16">
+                <div class="font-bold">{{items.item_name}}</div>
+                <div>{{items.item_desc}}</div>
+                <div class="text-green-700 font-bold">${{items.item_price}}</div>
+                
+            </div>
+            <div>
+                    <a class="bg-red-500 text-white px-4 py-2 font-bold rounded-md" href="{% url 'myapp:details' items.id %}">View Details</a>
+                </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock %}

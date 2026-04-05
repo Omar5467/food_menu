@@ -81,6 +81,11 @@ class ItemUpdateView(UpdateView):
     model = item
     fields = ['item_name','item_desc','item_price','item_image']
     template_name_suffix = '_update_form'
+
+    # prevent users to edit other users items
+    def get_queryset(self):
+        return item.objects.filter(user_name=self.request.user)
+            
     
 
 # def delete_item(request,id):

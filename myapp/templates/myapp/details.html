@@ -15,10 +15,12 @@
             <div>
                 {{item_detail.item_desc}}
             </div>
+            {% if item_detail.user_name == request.user %}
             <div>
                 <a class="bg-yellow-500 px-4 py-2 font-bold rounded-md text-white" href="{% url 'myapp:update_item' item_detail.id %}">Edit</a>
                 <a class="bg-red-500 px-4 py-2 font-bold rounded-md text-white" href="{% url 'myapp:delete_item' item_detail.id %}">Delete</a>
             </div>
+            {% endif %}
         </div>
     </div> 
     {% endblock %}

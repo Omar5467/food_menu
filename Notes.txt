@@ -1,0 +1,11 @@
+\du = list all users
+\c dbname = check which db you are connected
+\dt lis all tables
+ 
+
+Fixtures
+load data into json file
+py manage.py dumpdata myapp.item --indent 4 -o  items.json
+
+load data into database
+py manage.py loaddata items.json 

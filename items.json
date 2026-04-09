@@ -1,0 +1,41 @@
+[
+{
+    "model": "myapp.item",
+    "pk": 1,
+    "fields": {
+        "user_name": 1,
+        "item_name": "Muufo",
+        "item_price": "20.00",
+        "item_desc": "Muufo iyo Macsaro",
+        "item_image": "https://static01.nyt.com/images/2024/03/28/multimedia/ia-muufo-hbct/ia-muufo-hbct-googleFourByThree.jpg",
+        "is_available": true,
+        "created_at": "2026-04-07T09:12:38.913Z"
+    }
+},
+{
+    "model": "myapp.item",
+    "pk": 2,
+    "fields": {
+        "user_name": 1,
+        "item_name": "Pizza",
+        "item_price": "15.00",
+        "item_desc": "Large Pizza",
+        "item_image": "https://static.toiimg.com/thumb/56933159.cms?imgsize=686279&width=800&height=800",
+        "is_available": true,
+        "created_at": "2026-04-07T11:26:04.835Z"
+    }
+},
+{
+    "model": "myapp.item",
+    "pk": 3,
+    "fields": {
+        "user_name": 1,
+        "item_name": "Cambuulo",
+        "item_price": "20.00",
+        "item_desc": "Cambuulo digir",
+        "item_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr9ko-2ebln-9_Oj5XJYy83WsuEB-DZTwv9w&s",
+        "is_available": true,
+        "created_at": "2026-04-07T11:26:44.999Z"
+    }
+}
+]

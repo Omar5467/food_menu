@@ -33,17 +33,23 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'myapp.apps.MyappConfig',
+    'users.apps.UsersConfig',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp.apps.MyappConfig',
-    'users.apps.UsersConfig',
+    
 ]
 
 MIDDLEWARE = [
+    'myapp.middleware.BlockIPMiddleware',
+    'myapp.middleware.LogRequestMiddleware',
+    'myapp.middleware.TimerMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -141,3 +147,30 @@ LOGIN_URL = 'login'
 
 MEDIA_ROOT = BASE_DIR / 'pictures'
 MEDIA_URL = '/pictures/'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': BASE_DIR / 'cache',
+    }
+}
+
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": BASE_DIR / "debug.log",
+        },
+    },
+    "root": {
+        "handlers": ["console", "file"],
+        "level": "DEBUG",
+    },
+}

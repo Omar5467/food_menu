@@ -9,3 +9,34 @@ py manage.py dumpdata myapp.item --indent 4 -o  items.json
 
 load data into database
 py manage.py loaddata items.json 
+
+
+
+Raw SQL queris
+--------------
+
+items = item.objects.raw("select * from myapp_item")
+or
+items = item.objects.raw("select * from myapp_item where item_price < 5")
+or
+price_limit =7
+items = item.objects.raw("select * from myapp_item where item_price < %s", [price_limit])
+items
+for item in items:
+#Tab dheh kidib
+     print(item.item_name,item.item_price)
+
+enter enter
+
+
+# To access all objects including deleted ones
+item.objects.deleted()
+item.objects.deleted().first()
+item.objects.deleted().filter(item_name__icontains='cam') 
+
+#to recover deleted item
+
+items = item.objects.deleted().filter(item_name__icontains='cam').first() #find 1 item
+ items.is_deleted = False
+ items.deleted_at = None
+ items.save()

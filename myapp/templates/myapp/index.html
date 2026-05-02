@@ -1,17 +1,23 @@
 {% extends 'myapp/base.html' %}
+{% load custom_filters %}
+{% load cache %}
 
     {% block body %}
     <div>
-        {% for items in item_list %}
+        {% comment %} {% cache 900 page_obj %}  {% endcomment %}
+        {% for items in page_obj %}
         <div class="m-10 flex w-1/2 mx-auto">
             <div>
                 <img class="w-64 rounded-lg" src="{{items.item_image}}">
             </div>
             <div class="mx-16">
-                <div class="font-bold">{{items.item_name}}</div>
+                <div class="font-bold">{{items.item_name|upper|truncatechars:5}}</div>
                 <div>{{items.item_desc}}</div>
                 <div class="text-sm text-gray-600">by {{items.user_name.username}}</div>
-                <div class="text-green-700 font-bold">${{items.item_price}}</div>
+                <div class="text-sm text-gray-600">at {{items.created_at|date:"M d, Y H:i:A"}}</div>
+                <div class="text-sm text-gray-600">at {{items.created_at|timesince}} Ago</div>
+                <div class="text-green-700 font-bold">{{items.item_price|currency}}</div>
+                <div class="text-green-700 font-bold">Discounted price: {{items.item_price|discount:10|currency}}</div>
                 
             </div>
             <div>
@@ -19,5 +25,21 @@
                 </div>
         </div>
         {% endfor %}
+    </div>
+    <div class="flex items-center justify-center space-x-4 py-4">
+        <span class="mx-2">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 bg-gray-300 transition">Previous</a>
+            {% endif %}
+        </span>
+        <span>
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+        <span class="mx-2">
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 bg-gray-300">Next</a>
+            {% endif %} 
+            {% comment %} {% endcache %} {% endcomment %}
+        </span>
     </div>
     {% endblock %}
